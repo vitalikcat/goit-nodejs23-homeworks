@@ -1,5 +1,3 @@
-# goit-nodejs22-homeworks
-
 # 01-node-basics
 
 # Скриншоты

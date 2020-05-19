@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,10 +17,10 @@
     "url": "https://github.com/vitalikcat/goit-nodejs22-homeworks/issues"
   },
   "homepage": "https://github.com/vitalikcat/goit-nodejs22-homeworks#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.3"
-  },
   "dependencies": {
-    "yargs": "^15.3.1"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "joi": "^14.3.1",
+    "morgan": "^1.10.0"
   }
 }

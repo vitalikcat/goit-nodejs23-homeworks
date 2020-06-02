@@ -1,26 +1,30 @@
 {
-  "name": "goit-nodejs22-homeworks",
+  "name": "goit-nodejs23-homeworks",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon -r esm api/start.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vitalikcat/goit-nodejs22-homeworks.git"
   },
-  "author": "",
+  "author": "chepak v",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/vitalikcat/goit-nodejs22-homeworks/issues"
   },
   "homepage": "https://github.com/vitalikcat/goit-nodejs22-homeworks#readme",
   "dependencies": {
-    "cors": "^2.8.5",
+    "@hapi/joi": "^17.1.1",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
-    "joi": "^14.3.1",
-    "morgan": "^1.10.0"
+    "mongoose": "^5.9.16"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

@@ -24,6 +24,7 @@ class Server {
   initServer() {
     this.server = express();
   }
+
   initMiddleWares() {
     this.server.use(express.json());
   }

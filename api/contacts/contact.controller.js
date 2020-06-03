@@ -12,14 +12,15 @@ export const validateContact = (req, res, next) => {
     phone: Joi.string().required(),
     subscription: Joi.string().required(),
     password: Joi.string().required(),
-    token: Joi.string().required(),
+    token: Joi.string().allow("").required(),
   });
 
-  const { err } = contactValidSchema.validate(req.body);
+  const validationResult = contactValidSchema.validate(req.body);
 
-  if (err) {
-    return res.status(403).send("Bad request");
+  if (validationResult.error) {
+    return res.status(403).send(validationResult.error);
   }
+
   next();
 };
 
@@ -30,14 +31,15 @@ export const validateUpdateContact = (req, res, next) => {
     phone: Joi.string(),
     subscription: Joi.string(),
     password: Joi.string(),
-    token: Joi.string(),
+    token: Joi.string().allow(""),
   });
 
-  const { err } = contactValidSchema.validate(req.body);
+  const validationResult = contactValidSchema.validate(req.body);
 
-  if (err) {
-    return res.status(403).send("Bad request");
+  if (validationResult.error) {
+    return res.status(400).send(validationResult.error);
   }
+
   next();
 };
 
@@ -94,9 +96,9 @@ export const deleteContactById = async (req, res, next) => {
     const deletedContact = await contactModel.findByIdAndDelete(contactId);
 
     if (!deletedContact) {
-      return res.status(404).send();
+      return res.status(404).send("Not found!");
     } else {
-      return res.status(204).send();
+      return res.status(204).json(deletedContact);
     }
   } catch (error) {
     next(error);

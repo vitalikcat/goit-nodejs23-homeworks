@@ -1,21 +1,21 @@
 # goit-nodejs23-homeworks
 
-![Alt text]("./screenshots/registration-conflict.png" "registration-conflict")
+![registration-conflict]("./screenshots/registration-conflict.png")
 
-![Alt text]("./screenshots/registration-created.png" "registration-created")
+![registration-created]("./screenshots/registration-created.png")
 
-![Alt text]("./screenshots/login-auth-error.png" "login-auth-error")
+![login-auth-error]("./screenshots/login-auth-error.png")
 
-![Alt text]("./screenshots/login-ok.png" "login-ok")
+![login-ok]("./screenshots/login-ok.png")
 
-![Alt text]("./screenshots/logout-unauthorized-error.png" "logout-unauthorized-error")
+![logout-unauthorized-error]("./screenshots/logout-unauthorized-error.png")
 
-![Alt text]("./screenshots/logout-token-deleted.png" "logout-token-deleted")
+![logout-token-deleted]("./screenshots/logout-token-deleted.png")
 
-![Alt text]("./screenshots/token-unauthorized-error.png" "token-unauthorized-error")
+![token-unauthorized-error]("./screenshots/token-unauthorized-error.png")
 
-![Alt text]("./screenshots/token-auth-ok.png" "token-auth-ok")
+![token-auth-ok]("./screenshots/token-auth-ok.png")
 
-[Alt text]("./screenshots/current-user-unauthorized.png" "current-user-unauthorized")
+![current-user-unauthorized]("./screenshots/current-user-unauthorized.png")
 
-[Alt text]("./screenshots/current-user-success.png" "current-user-success")
+![current-user-success]("./screenshots/current-user-success.png")

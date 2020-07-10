@@ -1,9 +1,10 @@
 require = require("esm")(module);
-import mongoose from "mongoose";
-import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
-import contactRouter from "./contacts/contact.router";
+import express from "express";
+import mongoose from "mongoose";
+import authRouter from "./api/auth/auth.router";
+import userRouter from "./api/users/user.router";
 
 const PORT = process.env.PORT;
 const MONGODB_URL = process.env.MONGODB_URL;
@@ -27,10 +28,12 @@ class Server {
 
   initMiddleWares() {
     this.server.use(express.json());
+    this.server.use(express.static("public"));
   }
 
   initRoutes() {
-    this.server.use("/contacts", contactRouter);
+    this.server.use("/auth", authRouter);
+    this.server.use("/users", userRouter);
   }
 
   async initDataBase() {

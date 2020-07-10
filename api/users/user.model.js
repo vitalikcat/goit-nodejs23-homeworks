@@ -1,13 +1,18 @@
 import mongoose, { Schema } from "mongoose";
+05-images
 import Avatar from "avatar-builder";
 import fs from "fs";
 
 const avatar = Avatar.squareBuilder(128);
 
+
 const userSchema = new Schema({
   email: String,
   password: String,
+05-images
   avatarURL: String,
+
+
   subscription: {
     type: String,
     enum: ["free", "pro", "premium"],
@@ -38,6 +43,7 @@ class User {
       token: newToken,
     });
   }
+ 05-images
 
   generateAvatar = async () => {
     let number = Date.now();
@@ -73,6 +79,7 @@ class User {
       });
     });
   }
+
 }
 
 export default new User();

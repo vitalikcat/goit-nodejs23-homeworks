@@ -28,7 +28,10 @@ class Server {
 
   initMiddleWares() {
     this.server.use(express.json());
+05-images
     this.server.use(express.static("public"));
+
+ master
   }
 
   initRoutes() {

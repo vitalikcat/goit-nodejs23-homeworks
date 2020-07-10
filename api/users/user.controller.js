@@ -1,4 +1,5 @@
 import User from "./user.model";
+ 05-images
 import jwt from "jsonwebtoken";
 
 export const updateAvatar = async (req, res, next) => {
@@ -38,6 +39,10 @@ export const updateAvatar = async (req, res, next) => {
 };
 
 export const getCurrentUser = async (req, res, next) => {
+
+
+export const getCurrentUser = (req, res, next) => {
+ master
   const foundUser = req.user;
 
   if (foundUser) {

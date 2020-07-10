@@ -1,9 +1,13 @@
 import { Router } from "express";
 import { tokenMiddleware } from "../../api/auth/auth.token";
+ 05-images
 import multer from "multer";
 import path from "path";
 import {
   updateAvatar,
+
+import {
+ master
   getCurrentUser,
   getUsers,
   createUser,
@@ -17,6 +21,7 @@ import {
   validateUserId,
 } from "./user.validator.js";
 
+ 05-images
 const storage = multer.diskStorage({
   destination: "public/images",
   filename: (req, file, cb) => {
@@ -27,6 +32,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+
+ master
 const userRouter = Router();
 
 userRouter.get("/", tokenMiddleware, getUsers);
@@ -41,11 +48,14 @@ userRouter.put(
   updateUserById
 );
 userRouter.patch("/current/", tokenMiddleware, getCurrentUser);
+05-images
 userRouter.patch(
   "/avatars",
   tokenMiddleware,
   upload.single("avatar"),
   updateAvatar
 );
+
+ master
 
 export default userRouter;

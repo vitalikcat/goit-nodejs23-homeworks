@@ -7,11 +7,9 @@ export const registrationController = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const foundUserByEmail = await User.userModel.findOne({ email });
+    const foundUser = await User.userModel.findOne({ email });
 
-    if (foundUserByEmail) {
-      return res.status(409).json({ message: "Email in use" });
-    } else {
+    if (!foundUser) {
       const hashedPassword = await bcrypt.hash(password, salt);
 
       await User.generateAvatar();
@@ -31,9 +29,11 @@ export const registrationController = async (req, res, next) => {
         await User.userModel.create(newUser);
         return res.status(201).send(newUser);
       }
+    } else {
+      return res.status(409).json({ message: "Email in use" });
     }
   } catch (error) {
-    return res.status(500).send("Internal server error");
+    next(error);
   }
 };
 
@@ -42,6 +42,8 @@ export const loginController = async (req, res, next) => {
 
   try {
     const foundUser = await User.userModel.findOne({ email });
+
+    console.log("Found user: ", foundUser);
 
     if (foundUser) {
       const userId = foundUser._id;

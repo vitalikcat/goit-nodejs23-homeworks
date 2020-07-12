@@ -9,8 +9,7 @@ export const createToken = async (userId) => {
 
 export const tokenMiddleware = async (req, res, next) => {
   try {
-    const authorizationHeader = req.get("Authorization");
-    const token = authorizationHeader.replace("Bearer ", "");
+    const { authorization: token } = req.headers;
 
     let userId;
 

@@ -1,6 +1,41 @@
 import User from "./user.model";
+import jwt from "jsonwebtoken";
 
-export const getCurrentUser = (req, res, next) => {
+export const updateAvatar = async (req, res, next) => {
+  const { filename } = req.file;
+  let userId;
+  const { authorization: token } = req.headers;
+
+  if (token) {
+    const decodedToken = await jwt.decode(token);
+    userId = decodedToken.id;
+  } else {
+    return res.status(401).json({
+      message: "Not authorized",
+    });
+  }
+
+  try {
+    const foundUser = await User.userModel.findById(userId);
+
+    if (foundUser) {
+      const newAvatarUrl = `http://localhost:3000/images/${filename}`;
+      const userId = foundUser._id;
+
+      await User.findUserByIdAndUpdate(userId, {
+        avatarURL: newAvatarUrl,
+      });
+
+      return res.status(200).json({ avatarURL: newAvatarUrl });
+    } else {
+      return res.status(401).json({ message: "Not authorized" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCurrentUser = async (req, res, next) => {
   const foundUser = req.user;
 
   if (foundUser) {

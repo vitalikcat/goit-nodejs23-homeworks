@@ -10,7 +10,7 @@ import { tokenMiddleware } from "./auth.token";
 const authRouter = Router();
 
 authRouter.post("/register", authValidation, registrationController);
-authRouter.post("/login", tokenMiddleware, authValidation, loginController);
+authRouter.post("/login", authValidation, loginController);
 authRouter.patch("/logout", tokenMiddleware, logoutController);
 
 export default authRouter;

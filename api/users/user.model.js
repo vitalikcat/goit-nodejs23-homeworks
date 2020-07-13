@@ -14,6 +14,7 @@ const userSchema = new Schema({
     default: "free",
   },
   token: String,
+  verificationToken: String,
 });
 
 class User {

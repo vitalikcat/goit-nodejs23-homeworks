@@ -4,7 +4,9 @@ import jwt from "jsonwebtoken";
 export const updateAvatar = async (req, res, next) => {
   const { filename } = req.file;
   let userId;
-  const { authorization: token } = req.headers;
+
+  const authorizationHeader = req.get("Authorization");
+  const token = authorizationHeader.replace("Bearer ", "");
 
   if (token) {
     const decodedToken = await jwt.decode(token);

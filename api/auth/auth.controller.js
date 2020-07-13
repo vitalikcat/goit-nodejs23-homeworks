@@ -1,7 +1,62 @@
+import { v5 as uuidv5 } from "uuid";
+import sgMail from "@sendgrid/mail";
 import User from "../users/user.model";
 import bcrypt from "bcrypt";
 import { salt } from "../../config/index";
 import { createToken } from "./auth.token";
+
+export async function sendVerificationEmail(user) {
+  const verificationToken = uuidv5.URL;
+  const userId = user._id;
+  console.log("user email: ", user.email);
+
+  try {
+    const updatedUser = await User.userModel.findByIdAndUpdate(
+      userId,
+      { verificationToken },
+      { new: true }
+    );
+
+    if (updatedUser) {
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+      const msg = {
+        to: user.email,
+        from: "vitalik791@gmail.com",
+        subject: "Email verification",
+        html: `<a href="http://localhost:3000/auth/verify/${verificationToken}">Click to verify user</a>`,
+      };
+
+      await sgMail.send(msg);
+      return updatedUser;
+    } else {
+      return console.log("User not found");
+    }
+  } catch (error) {
+    return console.log("Error: ", error);
+  }
+}
+
+export async function verifyEmail(req, res, next) {
+  const { verificationToken } = req.params;
+  try {
+    const userToVerify = await User.userModel.findOne({ verificationToken });
+    const userId = userToVerify._id;
+    console.log("userToVerify: ", userToVerify);
+
+    if (!userToVerify) {
+      res.status(404).send("User not found");
+    }
+
+    await User.userModel.findByIdAndUpdate(userId, {
+      $unset: { verificationToken: 1 },
+    });
+
+    return res.status(200).send("OK");
+  } catch (error) {
+    return res.status(404).send("User not found");
+  }
+}
 
 export const registrationController = async (req, res, next) => {
   const { email, password } = req.body;
@@ -26,7 +81,11 @@ export const registrationController = async (req, res, next) => {
           password: hashedPassword,
           avatarURL: url,
         };
-        await User.userModel.create(newUser);
+
+        const createdUser = await User.userModel.create(newUser);
+
+        await sendVerificationEmail(createdUser);
+
         return res.status(201).send(newUser);
       }
     } else {
@@ -42,8 +101,6 @@ export const loginController = async (req, res, next) => {
 
   try {
     const foundUser = await User.userModel.findOne({ email });
-
-    console.log("Found user: ", foundUser);
 
     if (foundUser) {
       const userId = foundUser._id;

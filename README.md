@@ -1,3 +1,3 @@
 # goit-nodejs23-homeworks
 
-# 05-images
+# 06-email

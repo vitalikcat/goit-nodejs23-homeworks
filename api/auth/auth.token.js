@@ -8,10 +8,11 @@ export const createToken = async (userId) => {
 };
 
 export const tokenMiddleware = async (req, res, next) => {
-  const { authorization: token } = req.headers;
-  let userId;
-
   try {
+    const { authorization: token } = req.headers;
+
+    let userId;
+
     if (token) {
       userId = await jwt.verify(token, process.env.JWT_SECRET).id;
     } else {

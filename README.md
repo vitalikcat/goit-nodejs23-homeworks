@@ -1,15 +1,33 @@
 # goit-nodejs23-homeworks
 
-# 01-node-basics
+# 02-express
 
-// --action="list"
-![--action="list"](./screenshots/action-list.png "action-list")
+// get-contacts
+![get-contacts](./screenshots/get-contacts.png "get-contacts")
 
-// --action="get"
-![--action="get"](./screenshots/action-get.png "action-get")
+// get-contact-byid
+![get-contact-byid](./screenshots/get-contact-byid.png "get-contact-byid")
 
-// --action="add"
-![--action="add"](./screenshots/action-add.png "action-add")
+// get-contact-byid-not-found
+![get-contact-byid-not-found](./screenshots/get-contact-byid-not-found.png "get-contact-byid-not-found")
 
-// --action="remove"
-![--action="remove"](./screenshots/action-delete.png "action-remove")
+// delete-contact-succese
+![delete-contact-succese](./screenshots/delete-contact-succese.png "delete-contact-succese")
+
+// delete-contact-notFound
+![delete-contact-notFound](./screenshots/delete-contact-notFound.png "delete-contact-notFound")
+
+// post-contact
+![post-contact](./screenshots/post-contact.png "post-contact")
+
+// post-contact-missingField
+![post-contact-missingField](./screenshots/post-contact-missingField.png "post-contact-missingField")
+
+// patch-ok
+![patch-ok](./screenshots/patch-ok.png "patch-ok")
+
+// patch-missing
+![patch-missing](./screenshots/patch-missing.png "patch-missing")
+
+// patch-not-found
+![patch-not-found](./screenshots/patch-not-found.png "patch-not-found")

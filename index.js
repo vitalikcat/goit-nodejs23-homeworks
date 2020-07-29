@@ -1,29 +1,43 @@
-const contacts = require("./contacts");
-const argv = require("yargs").argv;
+require = require("esm")(module);
+import express from "express";
+import morgan from "morgan";
+import cors from "cors";
+import contactsRouter from "./contact/contacts.routes";
 
-function invokeAction({ action, id, name, email, phone }) {
-  switch (action) {
-    case "list":
-      contacts.listContacts();
-      break;
+const PORT = 3000;
 
-    case "get":
-      contacts
-        .getContactById(id)
-        .then((res) => console.log("foundUser: ", res));
-      break;
+export default class Server {
+  constructor() {
+    this.server = null;
+  }
 
-    case "add":
-      contacts.addContact(name, email, phone).then((res) => console.table(res));
-      break;
+  start() {
+    this.initServer();
+    this.initMiddlewares();
+    this.initRoutes();
+    this.startListening();
+  }
 
-    case "remove":
-      contacts.removeContact(id).then((res) => console.table(res));
-      break;
+  initServer() {
+    this.server = express();
+  }
 
-    default:
-      console.warn("\x1B[31m Unknown action type!");
+  initMiddlewares() {
+    this.server.use(express.json());
+    this.server.use(cors());
+    this.server.use(morgan("combined"));
+  }
+
+  initRoutes() {
+    this.server.use("/api/contacts", contactsRouter);
+  }
+
+  startListening() {
+    this.server.listen(PORT, (error) => {
+      if (error) {
+        return console.log("something bad happened", error);
+      }
+      console.log("Server is runnig on port: ", PORT);
+    });
   }
 }
-
-invokeAction(argv);
